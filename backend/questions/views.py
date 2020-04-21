@@ -28,10 +28,30 @@ def getQuestions(request):
     return JsonResponse(data, safe=False)
 
 def getQuestionById(request, id):
-    questions = Question.objects.filter(id=id)
-    data ={"results": list(questions.values("id", "question", "choice__choice", "choice__isCorrect"))}
-    return JsonResponse(data)
+    quiz = Quiz.objects.get(id=id)
+    quizname = quiz.title
+    questions = quiz.question_set.all()
+    data = []
+    data.append({
+        "title" : quizname,
+    })
+    x = 1
+    y = x-1
+    while x <= questions.count():
+        for question in questions:
+            choice = questions[y].choice_set.all()
+            choice = list(choice.values("choice"))
+            correct = questions[y].choice_set.filter(isCorrect=1)
+            correct = list(correct.values("choice"))
 
+            data.append({
+                "question" : question.question,
+                "choices" : choice,
+                "correct": correct
+            })
+            x+=1
+            y+=1    
+    return JsonResponse(data, safe=False)
 
 #    questions = Question.objects.extra(
 #        select={
