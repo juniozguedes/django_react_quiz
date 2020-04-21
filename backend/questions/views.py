@@ -15,7 +15,7 @@ def getQuestions(request):
         for question in questions:
             choice = questions[y].choice_set.all()
             choice = list(choice.values("choice"))
-            correct = questions[y].choice_set.filter(is_correct=1)
+            correct = questions[y].choice_set.filter(isCorrect=1)
             correct = list(correct.values("choice"))
 
             data.append({
@@ -29,7 +29,7 @@ def getQuestions(request):
 
 def getQuestionById(request, id):
     questions = Question.objects.filter(id=id)
-    data ={"results": list(questions.values("id", "question", "choice__choice", "choice__is_correct"))}
+    data ={"results": list(questions.values("id", "question", "choice__choice", "choice__isCorrect"))}
     return JsonResponse(data)
 
 
