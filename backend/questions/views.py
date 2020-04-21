@@ -29,11 +29,11 @@ def getQuestions(request):
 
 def getQuestionById(request, id):
     quiz = Quiz.objects.get(id=id)
-    quizname = quiz.title
     questions = quiz.question_set.all()
     data = []
     data.append({
-        "title" : quizname,
+        "title" : quiz.title,
+        "description": quiz.description
     })
     x = 1
     y = x-1
