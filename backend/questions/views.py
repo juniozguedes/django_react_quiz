@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from quiz.models import Quiz
 from questions.models import Question
 from choices.models import Choice
 
