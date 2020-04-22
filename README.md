@@ -4,7 +4,7 @@
 
 ```bash
 
-git clone https://github.com/juniozguedes/django_music.git
+git clone https://github.com/juniozguedes/django_react_quiz.git
 
 ```
 
